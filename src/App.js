@@ -1,20 +1,17 @@
-
 import React from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-} from 'react-native';
-
-const App = () => {
-  
-
+import { View, Text } from 'react-native';
+import Countdown from './components/countdown/Countdown';
+function App() {
   return (
-    <SafeAreaView >
-      <Text>Pomodoro</Text>
-    </SafeAreaView>
-  );
-};
+    <View style={{
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
 
+      <Countdown />
+    </View>
+  );
+}
 
 export default App;
