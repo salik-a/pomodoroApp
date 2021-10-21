@@ -3,11 +3,14 @@ import { View, Text, Animated, Button } from 'react-native';
 import styles from "./CountdownStyle";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
+import { useDispatch, useSelector } from "react-redux"
 
 function Countdown() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [durationTime, setDurationTime] = useState(600)
     const [key, setKey] = useState(0);
+    const workTime = useSelector(s => s.workTime);
+
     const children = (remainingTime) => {
         const minutes = Math.floor(remainingTime / 60)
         const seconds = remainingTime % 60;
@@ -21,11 +24,13 @@ function Countdown() {
 
         return `${minutes}:${seconds}`
     }
+
+
     return (
         <View style={styles.container}>
             <CountdownCircleTimer
                 isPlaying={isPlaying}
-                duration={durationTime}
+                duration={workTime}
                 colors={[
                     ["#004777", 0.4],
                     ["#F7B801", 0.4],
