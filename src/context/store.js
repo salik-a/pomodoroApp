@@ -1,3 +1,3 @@
 export default {
-    workTime: 10
+    workTime: ""
 }

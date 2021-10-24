@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Animated, Button } from 'react-native';
 import styles from "./CountdownStyle";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
@@ -7,9 +7,15 @@ import { useDispatch, useSelector } from "react-redux"
 
 function Countdown() {
     const [isPlaying, setIsPlaying] = useState(false);
-    const [durationTime, setDurationTime] = useState(600)
+
     const [key, setKey] = useState(0);
     const workTime = useSelector(s => s.workTime);
+
+
+    useEffect(() => {
+        setKey(prevKey => prevKey + 1);
+        setIsPlaying(false)
+    }, [workTime])
 
     const children = (remainingTime) => {
         const minutes = Math.floor(remainingTime / 60)

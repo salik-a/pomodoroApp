@@ -4,6 +4,7 @@ import Countdown from './components/countdown/Countdown';
 import Provider from "./context/provider"
 
 import { useDispatch } from "react-redux"
+import Timer from './components/timer/Timer';
 
 function App() {
   return (
@@ -15,7 +16,11 @@ function App() {
       alignItems: "center"
     }}>
 
-      <Countdown />
+
+
+        <Countdown />
+        <Timer />
+
     </View>
     </Provider>
   );
