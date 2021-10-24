@@ -48,7 +48,8 @@ function Countdown() {
                 onComplete={() => alert("Süre Tamamlandı")}
             >
                 {({ remainingTime, animatedColor }) => (
-                    <Animated.Text style={{ color: animatedColor, fontSize: 40 }}>
+                    <Animated.Text style={{ color: "black", fontSize: 40 }}>
+
                         {children(remainingTime)}
                     </Animated.Text>
                 )}
