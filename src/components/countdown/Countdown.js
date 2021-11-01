@@ -5,17 +5,9 @@ import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
 import { useDispatch, useSelector } from "react-redux"
 
-function Countdown() {
-    const [isPlaying, setIsPlaying] = useState(false);
-
-    const [key, setKey] = useState(0);
-    const workTime = useSelector(s => s.workTime);
+function Countdown({ isPlaying, workTime }) {
 
 
-    useEffect(() => {
-        setKey(prevKey => prevKey + 1);
-        setIsPlaying(false)
-    }, [workTime])
 
     const children = (remainingTime) => {
         const minutes = Math.floor(remainingTime / 60)
@@ -33,8 +25,9 @@ function Countdown() {
 
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} >
             <CountdownCircleTimer
+
                 isPlaying={isPlaying}
                 duration={workTime}
                 colors={[
@@ -42,21 +35,19 @@ function Countdown() {
                     ["#F7B801", 0.4],
                     ["#A30000", 0.2]
                 ]}
-                strokeWidth={20}
-                key={key}
-                size={250}
+                strokeWidth={12}
+
+                size={240}
                 onComplete={() => alert("Süre Tamamlandı")}
             >
                 {({ remainingTime, animatedColor }) => (
-                    <Animated.Text style={{ color: "black", fontSize: 40 }}>
+                    <Animated.Text style={{ color: "#080808", fontSize: 50, fontWeight: "bold" }}>
 
                         {children(remainingTime)}
                     </Animated.Text>
                 )}
             </CountdownCircleTimer>
-            <Button title="Start" onPress={() => setIsPlaying(true)} />
-            <Button title="Stop" onPress={() => setIsPlaying(false)} />
-            <Button title="Finish" onPress={() => setKey(prevKey => prevKey + 1)} />
+
 
         </View>
     );
