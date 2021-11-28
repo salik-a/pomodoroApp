@@ -8,7 +8,7 @@ const Button = ({ title, onPress, iconName }) => {
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
             <View style={styles.row}>
-                <Text style={styles.title}>{title}</Text>
+                {title && <Text style={styles.title}>{title}</Text>}
                 <Icon name={iconName} size={24} color={"white"} />
             </View>
         </TouchableOpacity>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { WheelPicker } from "react-native-wheel-picker-android";
-import styles from "./TimerStyle";
+import styles from "./WorkTimerStyle";
 import { useDispatch, useSelector } from "react-redux"
 
 const data = [
@@ -33,13 +33,13 @@ const Timer = () => {
       <WheelPicker
         style={{
           width: 50,
-          height: 120
+          height: 110
         }}
         selectedItem={selected}
         data={data}
         onItemSelected={(index) => setSelected(index)}
       />
-
+      <Text style={styles.text}>Work Time</Text>
     </View>
   );
 };

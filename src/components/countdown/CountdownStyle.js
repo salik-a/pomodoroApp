@@ -20,5 +20,16 @@ export default StyleSheet.create({
         shadowRadius: 11.14,
 
         elevation: 17,
+    },
+    header: {
+        fontSize: 18,
+        color: 'rgb(189,192,207)'
+    },
+    min: {
+        color: 'rgb(161,164,171)',
+        marginHorizontal: 25
+    },
+    row: {
+        flexDirection: "row"
     }
 })

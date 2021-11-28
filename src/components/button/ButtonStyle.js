@@ -4,10 +4,10 @@ export default StyleSheet.create({
     container: {
         padding: 10,
         margin: 10,
-        backgroundColor: "green",
-        borderRadius: 10,
+        backgroundColor: "#0091ff",
+        borderRadius: 25,
         alignItems: "center",
-        width: "40%",
+        minWidth: "25%",
         justifyContent: "center"
     },
     title: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Animated, Button } from 'react-native';
+import { View, Text, Animated, Button, Platform } from 'react-native';
 import styles from "./CountdownStyle";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
@@ -31,20 +31,25 @@ function Countdown({ isPlaying, workTime }) {
                 isPlaying={isPlaying}
                 duration={workTime}
                 colors={[
-                    ["#004777", 0.4],
-                    ["#F7B801", 0.4],
-                    ["#A30000", 0.2]
-                ]}
-                strokeWidth={12}
+                    ["#00C7FF", 1],
 
-                size={240}
+                ]}
+                strokeWidth={15}
+
+                size={250}
                 onComplete={() => alert("Süre Tamamlandı")}
             >
                 {({ remainingTime, animatedColor }) => (
-                    <Animated.Text style={{ color: "#080808", fontSize: 50, fontWeight: "bold" }}>
-
-                        {children(remainingTime)}
-                    </Animated.Text>
+                    <>
+                        <Text style={styles.header}>Work Session</Text>
+                        <Animated.Text style={{ color: "#353f5a", fontSize: 60, fontFamily: "notoserif", }}>
+                            {children(remainingTime)}
+                        </Animated.Text>
+                        <View style={styles.row}>
+                            <Text style={styles.min}>min</Text>
+                            <Text style={styles.min}>sec</Text>
+                        </View>
+                    </>
                 )}
             </CountdownCircleTimer>
 

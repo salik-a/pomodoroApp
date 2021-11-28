@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import Countdown from '../../components/countdown/Countdown';
 import Button from "../../components/button/Button"
-
+import { Shadow } from 'react-native-shadow-2';
 import styles from "./HomeScreenStyle"
 import { useDispatch, useSelector } from "react-redux"
-import Timer from '../../components/timer/Timer';
-
+import WorkTimer from '../../components/WorkTimer/WorkTimer';
+import BreakTimer from '../../components/BreakTimer/BreakTimer';
 const HomeScreen = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [key, setKey] = useState(0);
@@ -30,16 +30,17 @@ const HomeScreen = () => {
       <Countdown key={key} isPlaying={isPlaying} workTime={workTime} />
 
       <View style={styles.bottom}>
+
+
+        <Shadow containerViewStyle={{ alignSelf: "center", marginTop: 50 }} viewStyle={{ paddingVertical: 10, }} radius={20} distance={10} startColor="#00000010">
         <View style={styles.timers}>
-          <View style={styles.timer}>
-            <Timer />
-            <Text style={styles.text}>Work Time</Text>
+            <WorkTimer />
+            <View style={styles.line} />
+            <BreakTimer />
           </View>
-          <View style={styles.timer}>
-            <Timer />
-            <Text style={styles.text}>Break Time</Text>
-          </View>
-        </View>
+        </Shadow>
+
+
 
         <View style={styles.buttons}>
           {isPlaying ? (

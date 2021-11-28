@@ -5,10 +5,14 @@ export default StyleSheet.create({
 
 
         alignItems: 'center',
-        borderWidth: 1,
-        backgroundColor: '#F5FCFF',
+
         justifyContent: 'center',
-        marginHorizontal: 25
+        marginHorizontal: 30
+    },
+    text: {
+        marginTop: 20,
+        marginVertical: 5,
+        fontSize: 18
     },
 
 });
