@@ -1,3 +1,6 @@
 export default {
-    workTime: 0
+    workTime: 15,
+    breakTime: 5,
+    status: "Work Session",
+    stage: 0
 }

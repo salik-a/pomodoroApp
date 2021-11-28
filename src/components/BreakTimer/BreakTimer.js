@@ -21,7 +21,7 @@ const Timer = () => {
   const dispatch = useDispatch();
 
   const handleTime = () => {
-    dispatch({ type: "SET_TIME", payload: { selected } })
+    dispatch({ type: "SET_BREAKTIME", payload: { selected } })
   }
 
   useEffect(() => {

@@ -5,10 +5,29 @@ import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
 import { useDispatch, useSelector } from "react-redux"
 
-function Countdown({ isPlaying, workTime }) {
+function Countdown({ isPlaying, setIsPlaying }) {
 
 
+    const dispatch = useDispatch();
+    const status = useSelector(s => s.status);
+    const workTime = useSelector(s => s.workTime);
+    const breakTime = useSelector(s => s.breakTime);
+    const stage = useSelector(s => s.stage);
 
+    function finish() {
+        if (stage == 4) {
+            dispatch({ type: "SET_STAGE", payload: stage + 1 })
+            setIsPlaying(true);
+        } else {
+            if (status == "Work Session") {
+                dispatch({ type: "SET_STATUS", payload: "Break" })
+            } else {
+                dispatch({ type: "SET_STATUS", payload: "Work Session" })
+                dispatch({ type: "SET_STAGE", payload: stage + 1 })
+            }
+            setIsPlaying(true);
+        }
+    }
     const children = (remainingTime) => {
         const minutes = Math.floor(remainingTime / 60)
         const seconds = remainingTime % 60;
@@ -29,19 +48,19 @@ function Countdown({ isPlaying, workTime }) {
             <CountdownCircleTimer
 
                 isPlaying={isPlaying}
-                duration={workTime}
+                duration={status == "Work Session" ? workTime : breakTime}
                 colors={[
-                    ["#00C7FF", 1],
+                    [status == "Work Session" ? "#00C7FF" : "#6de36d", 1],
 
                 ]}
                 strokeWidth={15}
 
                 size={250}
-                onComplete={() => alert("Süre Tamamlandı")}
+                onComplete={() => finish()}
             >
                 {({ remainingTime, animatedColor }) => (
                     <>
-                        <Text style={styles.header}>Work Session</Text>
+                        <Text style={styles.header}>{status}</Text>
                         <Animated.Text style={{ color: "#353f5a", fontSize: 60, fontFamily: "notoserif", }}>
                             {children(remainingTime)}
                         </Animated.Text>
