@@ -1,3 +1,4 @@
+
 export default {
     workTime: 15,
     breakTime: 5,

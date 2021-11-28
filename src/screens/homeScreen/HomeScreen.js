@@ -16,8 +16,6 @@ const HomeScreen = ({ navigation }) => {
   const status = useSelector(s => s.status);
   const stage = useSelector(s => s.stage);
 
-  console.log(status)
-
   const color = status == "Work Session" ? "#117FFC" : "#3db738"
   const [isPlaying, setIsPlaying] = useState(false);
   const [key, setKey] = useState(0);
@@ -26,10 +24,14 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     setKey(prevKey => prevKey + 1);
     setIsPlaying(false);
+    //AsyncStorage.getItem("@WORKTIME").then(time => {
+    //  time && console.log("home", time)
+    //})
   }, [workTime])
 
   useEffect(() => {
     setKey(prevKey => prevKey + 1);
+
   }, [status])
 
   function handleReset() {

@@ -14,10 +14,11 @@ function Countdown({ isPlaying, setIsPlaying }) {
     const breakTime = useSelector(s => s.breakTime);
     const stage = useSelector(s => s.stage);
 
+    const time = status == "Work Session" ? workTime : breakTime
     function finish() {
         if (stage == 4) {
-            dispatch({ type: "SET_STAGE", payload: stage + 1 })
-            setIsPlaying(true);
+            dispatch({ type: "SET_STAGE", payload: 0 })
+            setIsPlaying(false);
         } else {
             if (status == "Work Session") {
                 dispatch({ type: "SET_STATUS", payload: "Break" })
@@ -48,7 +49,7 @@ function Countdown({ isPlaying, setIsPlaying }) {
             <CountdownCircleTimer
 
                 isPlaying={isPlaying}
-                duration={status == "Work Session" ? workTime : breakTime}
+                duration={time}
                 colors={[
                     [status == "Work Session" ? "#00C7FF" : "#6de36d", 1],
 

@@ -17,18 +17,31 @@ const data = [
 
 const Timer = () => {
 
-  const workTime = useSelector(s => s.workTime);
-  const [selected, setSelected] = useState(workTime);
-
   const dispatch = useDispatch();
+  const workTime = useSelector(s => s.workTime);
+  const [selected, setSelected] = useState(15);
+  const [state, setState] = useState(false)
+  const [key, setKey] = useState(0);
 
-  const handleTime = () => {
-    dispatch({ type: "SET_WORKTIME", payload: { selected } })
+
+
+
+  const handleTime = (index) => {
+
+    if (state) {
+      console.log("worktimer", index)
+      dispatch({ type: "SET_WORKTIME", payload: { index } })
+      setSelected(index)
+    } else {
+      setState(true)
+      setSelected((parseInt(JSON.parse(workTime)) / 60) - 10)
+      setKey(prevKey => prevKey + 1);
+    }
+
   }
 
-  useEffect(() => {
-    handleTime()
-  }, [selected])
+
+
 
   return (
     <View style={styles.container}>
@@ -39,7 +52,8 @@ const Timer = () => {
         }}
         selectedItem={selected}
         data={data}
-        onItemSelected={(index) => setSelected(index)}
+        onItemSelected={(index) => handleTime(index)}
+        key={key}
       />
       <Text style={styles.text}>Work Time</Text>
     </View>

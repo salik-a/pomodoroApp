@@ -4,29 +4,36 @@ import { WheelPicker } from "react-native-wheel-picker-android";
 import styles from "./BreakTimerStyle";
 import { useDispatch, useSelector } from "react-redux"
 
+
 const data = [
-  "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
-  "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
-  "41", "42", "43", "44", "45", "46", "47", "48", "49", "50",
-  "51", "52", "53", "54", "55", "56", "57", "58", "59", "60"
+  "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+  "16", "17", "18", "19", "20", "21", "22", "23", "24", "25",
+  "26", "27", "28", "29", "30"
 ];
 
 
 
 const Timer = () => {
 
-  const [selected, setSelected] = useState(10);
-
   const dispatch = useDispatch();
+  const breakTime = useSelector(s => s.breakTime)
+  const [selected, setSelected] = useState(5);
+  const [state, setState] = useState(false)
+  const [key, setKey] = useState(0);
 
-  const handleTime = () => {
-    dispatch({ type: "SET_BREAKTIME", payload: { selected } })
+  const handleTime = (index) => {
+
+    if (state) {
+      console.log("breaktimer", index)
+      dispatch({ type: "SET_BREAKTIME", payload: { index } })
+      setSelected(index)
+    } else {
+      setState(true)
+      setSelected((parseInt(JSON.parse(breakTime)) / 60) - 5)
+      setKey(prevKey => prevKey + 1);
+    }
+
   }
-
-  useEffect(() => {
-    handleTime()
-  }, [selected])
 
   return (
     <View style={styles.container}>
@@ -37,7 +44,8 @@ const Timer = () => {
         }}
         selectedItem={selected}
         data={data}
-        onItemSelected={(index) => setSelected(index)}
+        onItemSelected={(index) => handleTime(index)}
+        key={key}
       />
       <Text style={styles.text}>Break Time</Text>
     </View>
