@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import WorkTimer from '../../components/WorkTimer/WorkTimer';
 import BreakTimer from '../../components/BreakTimer/BreakTimer';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import LinearGradient from 'react-native-linear-gradient';
 
 const HomeScreen = ({ navigation }) => {
 
@@ -16,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
   const status = useSelector(s => s.status);
   const stage = useSelector(s => s.stage);
 
-  const color = status == "Work Session" ? "#117FFC" : "#3db738"
+  const colors = status == "Work Session" ? ['#3886fa', '#6487e8', '#2592f8', '#008efa'] : ['#63ce46', '#48a92d', '#63ce46', '#63ce46', '#63ce46']
   const [isPlaying, setIsPlaying] = useState(false);
   const [key, setKey] = useState(0);
 
@@ -24,9 +25,6 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     setKey(prevKey => prevKey + 1);
     setIsPlaying(false);
-    //AsyncStorage.getItem("@WORKTIME").then(time => {
-    //  time && console.log("home", time)
-    //})
   }, [workTime])
 
   useEffect(() => {
@@ -43,7 +41,11 @@ const HomeScreen = ({ navigation }) => {
   }
   return (
 
-    <View style={[styles.container, { backgroundColor: color }]}>
+    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={colors} style={styles.container}>
+
+
+
+
       <Text>{stage}</Text>
       <TouchableOpacity
         style={{
@@ -74,15 +76,15 @@ const HomeScreen = ({ navigation }) => {
           {isPlaying ? (
             <View style={styles.row}>
               <Button onPress={() => setIsPlaying(false)} iconName="stop" color="#ef2d2a" />
-              <Button onPress={() => handleReset()} iconName="restart" color={color} />
+              <Button onPress={() => handleReset()} iconName="restart" color={status == "Work Session" ? "#407df7" : "#3db738"} />
             </View>
           ) : (
-              <Button onPress={() => setIsPlaying(true)} iconName="play" color={color} />
+              <Button onPress={() => setIsPlaying(true)} iconName="play" color={status == "Work Session" ? "#407df7" : "#3db738"} />
           )}
         </View>
       </View>
-    </View>
     
+    </LinearGradient>
   );
 }
 

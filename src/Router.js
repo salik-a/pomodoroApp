@@ -14,10 +14,8 @@ function Router() {
 
         <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Settings" component={SettingsScreen} />
-
             </Stack.Navigator>
         </NavigationContainer>
     );
