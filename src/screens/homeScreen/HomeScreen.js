@@ -10,6 +10,7 @@ import BreakTimer from '../../components/BreakTimer/BreakTimer';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import StageCard from '../../components/stageCard/StageCard';
+import PushNotification from "react-native-push-notification";
 
 
 const HomeScreen = ({ navigation }) => {
@@ -33,9 +34,11 @@ const HomeScreen = ({ navigation }) => {
   }, [workTime])
 
   useEffect(() => {
-    setKey(prevKey => prevKey + 1);
 
+    setKey(prevKey => prevKey + 1);
   }, [status])
+
+
 
   function handleReset() {
     setKey(prevKey => prevKey + 1);

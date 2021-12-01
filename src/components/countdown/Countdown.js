@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Animated, Button, Platform } from 'react-native';
 import styles from "./CountdownStyle";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
-
 import { useDispatch, useSelector } from "react-redux"
+import PushNotification from "react-native-push-notification";
+
 
 function Countdown({ isPlaying, setIsPlaying }) {
 
@@ -19,8 +20,39 @@ function Countdown({ isPlaying, setIsPlaying }) {
     const constantCycle = useSelector(s => s.constantCycle);
     const time = status == "Work Session" ? workTime : status == "Break" ? breakTime : long
 
+    const createChannel = () => {
+        PushNotification.createChannel({
+            channelId: "test",
+            channelName: "Test Channel",
+            vibrate: true,
+        })
+    }
+    useEffect(() => {
+        createChannel()
+    }, [])
+
+    const handleNotification = () => {
+        console.log("aaa")
+
+        PushNotification.localNotification({
+            channelId: "test",
+            message: `${status} Finished`, // (required)
+            //date: new Date(Date.now()), // in 60 secs
+            allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
+            //repeatTime: 1, // (optional) Increment of configured repeatType. Check 'Repeating Notifications' section for more info.
+            vibrate: false,
+            vibration: 1000,
+            onlyAlertOnce: true,
+            playSound: true,
+            soundName: "default",
+            color: "red",
+        });
+        setTimeout(() => { PushNotification.cancelAllLocalNotifications() }, 5000);
+    }
+
     function finish() {
 
+        handleNotification()
         if (stage == constantStage) {
 
             if (status == "Work Session") {
@@ -66,7 +98,7 @@ function Countdown({ isPlaying, setIsPlaying }) {
             <CountdownCircleTimer
 
                 isPlaying={isPlaying}
-                duration={time * 60}
+                duration={time}
                 colors={[
                     [status == "Work Session" ? "#00C7FF" : "#6de36d", 1],
 

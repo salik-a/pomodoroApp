@@ -34,7 +34,7 @@ const Timer = () => {
       setSelected(index)
     } else {
       setState(true)
-      setSelected((parseInt(JSON.parse(workTime)) / 60) - 10)
+      setSelected((parseInt(JSON.parse(workTime)) - 10))
       setKey(prevKey => prevKey + 1);
     }
 
