@@ -9,6 +9,8 @@ import WorkTimer from '../../components/WorkTimer/WorkTimer';
 import BreakTimer from '../../components/BreakTimer/BreakTimer';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import LinearGradient from 'react-native-linear-gradient';
+import StageCard from '../../components/stageCard/StageCard';
+
 
 const HomeScreen = ({ navigation }) => {
 
@@ -20,7 +22,7 @@ const HomeScreen = ({ navigation }) => {
   const stage = useSelector(s => s.stage);
   const constantStage = useSelector(s => s.constantStage);
 
-  const colors = status == "Work Session" ? ['#3C7CF7', '#4071F4', '#3C7CF7', '#4D62EA'] : ['#63ce46', '#48a92d', '#63ce46', '#63ce46', '#63ce46']
+  const colors = status == "Work Session" ? ['#3C7CF7', '#4071F4', '#3C7CF7', '#4D62EA'] : ['#6db95f', '#5bae4c', '#6db95f', '#5bae4c', '#6db95f']
   const [isPlaying, setIsPlaying] = useState(false);
   const [key, setKey] = useState(0);
 
@@ -48,7 +50,6 @@ const HomeScreen = ({ navigation }) => {
       <View style={styles.leftTop}>
         <Text style={styles.cycle}>CYCLE {cycle}/{constantCycle}</Text>
       </View>
-      <Text>{stage}/{constantStage}</Text>
       <TouchableOpacity
         style={styles.rightTop}
         onPress={() => navigation.navigate("Settings")}
@@ -59,8 +60,9 @@ const HomeScreen = ({ navigation }) => {
 
       <View style={styles.bottom}>
 
+        <StageCard constantStage={constantStage} stage={stage} />
 
-        <Shadow containerViewStyle={{ alignSelf: "center", marginTop: 50 }} viewStyle={{ paddingVertical: 10, }} radius={20} distance={10} startColor="#00000010">
+        <Shadow containerViewStyle={{ alignSelf: "center", marginTop: 20 }} viewStyle={{ paddingVertical: 10 }} radius={10} distance={10} startColor="#00000010">
           <View style={styles.timers}>
             <WorkTimer />
             <View style={styles.line} />

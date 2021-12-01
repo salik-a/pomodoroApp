@@ -5,9 +5,9 @@ export default StyleSheet.create({
     view: {
         flexDirection: "row",
         alignSelf: "center",
-        width: 340,
+        width: 320,
         justifyContent: "space-between",
-        paddingHorizontal: 20
+        paddingHorizontal: 15
     },
     title: {
         color: "#474E61",

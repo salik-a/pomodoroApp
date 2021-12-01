@@ -17,7 +17,7 @@ function Countdown({ isPlaying, setIsPlaying }) {
     const cycle = useSelector(s => s.cycle);
     const long = useSelector(s => s.long);
     const constantCycle = useSelector(s => s.constantCycle);
-    const time = status == "Work Session" ? workTime * 60 : status == "Break" ? breakTime * 60 : long * 60
+    const time = status == "Work Session" ? workTime : status == "Break" ? breakTime : long
 
     function finish() {
 
@@ -66,7 +66,7 @@ function Countdown({ isPlaying, setIsPlaying }) {
             <CountdownCircleTimer
 
                 isPlaying={isPlaying}
-                duration={time}
+                duration={time * 60}
                 colors={[
                     [status == "Work Session" ? "#00C7FF" : "#6de36d", 1],
 

@@ -23,7 +23,7 @@ export default StyleSheet.create({
     buttons: {
         alignSelf: "center",
         flexDirection: "row",
-        marginTop: 10,
+        marginTop: 5,
     },
     timers: {
         flexDirection: "row",
