@@ -13,12 +13,28 @@ function Countdown({ isPlaying, setIsPlaying }) {
     const workTime = useSelector(s => s.workTime);
     const breakTime = useSelector(s => s.breakTime);
     const stage = useSelector(s => s.stage);
+    const constantStage = useSelector(s => s.constantStage);
+    const cycle = useSelector(s => s.cycle);
+    const long = useSelector(s => s.long);
+    const constantCycle = useSelector(s => s.constantCycle);
+    const time = status == "Work Session" ? workTime * 60 : status == "Break" ? breakTime * 60 : long * 60
 
-    const time = status == "Work Session" ? workTime : breakTime
     function finish() {
-        if (stage == 4) {
-            dispatch({ type: "SET_STAGE", payload: 0 })
-            setIsPlaying(false);
+
+        if (stage == constantStage) {
+
+            if (status == "Work Session") {
+                dispatch({ type: "SET_STATUS", payload: "Long Break" })
+            } else {
+                if (cycle == constantCycle) {
+                    setIsPlaying(false)
+                } else {
+                    dispatch({ type: "SET_CYCLE", payload: cycle + 1 })
+                    dispatch({ type: "SET_STAGE", payload: 1 })
+                    dispatch({ type: "SET_STATUS", payload: "Work Session" })
+                }
+
+            }
         } else {
             if (status == "Work Session") {
                 dispatch({ type: "SET_STATUS", payload: "Break" })
@@ -28,6 +44,7 @@ function Countdown({ isPlaying, setIsPlaying }) {
             }
             setIsPlaying(true);
         }
+
     }
     const children = (remainingTime) => {
         const minutes = Math.floor(remainingTime / 60)
@@ -55,8 +72,8 @@ function Countdown({ isPlaying, setIsPlaying }) {
 
                 ]}
                 strokeWidth={15}
-
-                size={250}
+                trailColor="white"
+                size={240}
                 onComplete={() => finish()}
             >
                 {({ remainingTime, animatedColor }) => (

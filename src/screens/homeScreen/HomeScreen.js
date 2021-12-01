@@ -15,9 +15,12 @@ const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const workTime = useSelector(s => s.workTime);
   const status = useSelector(s => s.status);
+  const cycle = useSelector(s => s.cycle);
+  const constantCycle = useSelector(s => s.constantCycle);
   const stage = useSelector(s => s.stage);
+  const constantStage = useSelector(s => s.constantStage);
 
-  const colors = status == "Work Session" ? ['#3886fa', '#6487e8', '#2592f8', '#008efa'] : ['#63ce46', '#48a92d', '#63ce46', '#63ce46', '#63ce46']
+  const colors = status == "Work Session" ? ['#3C7CF7', '#4071F4', '#3C7CF7', '#4D62EA'] : ['#63ce46', '#48a92d', '#63ce46', '#63ce46', '#63ce46']
   const [isPlaying, setIsPlaying] = useState(false);
   const [key, setKey] = useState(0);
 
@@ -36,26 +39,21 @@ const HomeScreen = ({ navigation }) => {
     setKey(prevKey => prevKey + 1);
     setIsPlaying(false);
     dispatch({ type: "SET_STATUS", payload: "Work Session" })
-    dispatch({ type: "SET_STAGE", payload: 0 })
-
+    dispatch({ type: "SET_STAGE", payload: 1 })
+    dispatch({ type: "SET_CYCLE", payload: 1 })
   }
   return (
 
-    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={colors} style={styles.container}>
-
-
-
-
-      <Text>{stage}</Text>
+    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={colors} style={styles.container}>
+      <View style={styles.leftTop}>
+        <Text style={styles.cycle}>CYCLE {cycle}/{constantCycle}</Text>
+      </View>
+      <Text>{stage}/{constantStage}</Text>
       <TouchableOpacity
-        style={{
-          alignSelf: "flex-end",
-          position: "absolute",
-          padding: 20
-        }}
+        style={styles.rightTop}
         onPress={() => navigation.navigate("Settings")}
       >
-        <Icon name="settings" size={26} color={"white"} />
+        <Icon name="settings" size={24} color={"#D4EAFC"} />
       </TouchableOpacity>
       <Countdown key={key} isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
 
@@ -63,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
 
 
         <Shadow containerViewStyle={{ alignSelf: "center", marginTop: 50 }} viewStyle={{ paddingVertical: 10, }} radius={20} distance={10} startColor="#00000010">
-        <View style={styles.timers}>
+          <View style={styles.timers}>
             <WorkTimer />
             <View style={styles.line} />
             <BreakTimer />
@@ -83,7 +81,7 @@ const HomeScreen = ({ navigation }) => {
           )}
         </View>
       </View>
-    
+
     </LinearGradient>
   );
 }

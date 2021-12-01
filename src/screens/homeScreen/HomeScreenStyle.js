@@ -37,6 +37,20 @@ export default StyleSheet.create({
 
     line: {
         borderWidth: 0.5, height: "75%", alignSelf: "center", borderColor: "lightgray"
+    },
+    rightTop: {
+        alignSelf: "flex-end",
+        position: "absolute",
+        padding: 22
+    },
+    leftTop: {
+        alignSelf: "flex-start",
+        position: "absolute",
+        padding: 20
+    },
+    cycle: {
+        color: "#D4EAFC",
+        fontSize: 19
     }
 
 

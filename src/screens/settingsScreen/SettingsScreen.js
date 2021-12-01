@@ -10,20 +10,20 @@ const SettingsScreen = () => {
 
     const dispatch = useDispatch();
     const status = useSelector(s => s.status);
-    const cycle = useSelector(s => s.cycle);
+    const constantCycle = useSelector(s => s.constantCycle);
     const long = useSelector(s => s.long);
     const constantStage = useSelector(s => s.constantStage);
 
 
     const handlePlusPress = (text) => {
-        if (text === "Cycle") {
-            if (cycle < 4) {
-                const number = cycle + 1
-                dispatch({ type: "SET_CYCLE", payload: { number } })
+        if (text === "constantCycle") {
+            if (constantCycle < 4) {
+                const number = constantCycle + 1
+                dispatch({ type: "SET_CONSTANTCYCLE", payload: { number } })
             }
 
         } else if (text === "constantStage") {
-            if (constantStage < 4) {
+            if (constantStage < 5) {
                 const number = constantStage + 1
                 dispatch({ type: "SET_CONSTANTSTAGE", payload: { number } })
             }
@@ -38,10 +38,10 @@ const SettingsScreen = () => {
     };
 
     const handleMinusPress = (text) => {
-        if (text === "Cycle") {
-            if (cycle > 2) {
-                const number = cycle - 1
-                dispatch({ type: "SET_CYCLE", payload: { number } })
+        if (text === "constantCycle") {
+            if (constantCycle > 2) {
+                const number = constantCycle - 1
+                dispatch({ type: "SET_CONSTANTCYCLE", payload: { number } })
             }
 
         } else if (text === "constantStage") {
@@ -51,7 +51,7 @@ const SettingsScreen = () => {
             }
 
         } else {
-            if (long > 10) {
+            if (long > 2) {
                 const number = long - 1
                 dispatch({ type: "SET_LONG", payload: { number } })
             }
@@ -67,7 +67,7 @@ const SettingsScreen = () => {
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={colors}>
                 <Text style={styles.header}>Settings</Text>
             </LinearGradient>
-            <Card title="Number Of Cycles" number={cycle} plusPress={() => handlePlusPress("Cycle")} minusPress={() => handleMinusPress("Cycle")} />
+            <Card title="Number Of Cycles" number={constantCycle} plusPress={() => handlePlusPress("constantCycle")} minusPress={() => handleMinusPress("constantCycle")} />
             <Card title="Number Of Stages" number={constantStage} plusPress={() => handlePlusPress("constantStage")} minusPress={() => handleMinusPress("constantStage")} />
             <Card title="Long Break Time" number={long} plusPress={() => handlePlusPress("Long")} minusPress={() => handleMinusPress("Long")} />
 
