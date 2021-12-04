@@ -41,13 +41,13 @@ function Countdown({ isPlaying, setIsPlaying }) {
             allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
             //repeatTime: 1, // (optional) Increment of configured repeatType. Check 'Repeating Notifications' section for more info.
             vibrate: false,
-            vibration: 1000,
+            vibration: 3000,
             onlyAlertOnce: true,
             playSound: true,
             soundName: "default",
             color: "red",
         });
-        setTimeout(() => { PushNotification.cancelAllLocalNotifications() }, 5000);
+        setTimeout(() => { PushNotification.cancelAllLocalNotifications() }, 10000);
     }
 
     function finish() {
@@ -98,7 +98,7 @@ function Countdown({ isPlaying, setIsPlaying }) {
             <CountdownCircleTimer
 
                 isPlaying={isPlaying}
-                duration={time}
+                duration={time * 60}
                 colors={[
                     [status == "Work Session" ? "#00C7FF" : "#6de36d", 1],
 

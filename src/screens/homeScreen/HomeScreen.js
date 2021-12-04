@@ -10,7 +10,7 @@ import BreakTimer from '../../components/BreakTimer/BreakTimer';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import StageCard from '../../components/stageCard/StageCard';
-import PushNotification from "react-native-push-notification";
+import KeepAwake from 'react-native-keep-awake';
 
 
 const HomeScreen = ({ navigation }) => {
@@ -86,7 +86,7 @@ const HomeScreen = ({ navigation }) => {
           )}
         </View>
       </View>
-
+      <KeepAwake />
     </LinearGradient>
   );
 }
